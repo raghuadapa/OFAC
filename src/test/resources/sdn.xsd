@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://tempuri.org/sdnList.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="sdnList" type="sdn:sdnListType" xmlns:sdn="http://tempuri.org/sdnList.xsd"/>
+  <xs:complexType name="sdnEntryType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="uid"/>
+      <xs:element type="xs:string" name="firstName" minOccurs="0"/>
+      <xs:element type="xs:string" name="lastName"/>
+      <xs:element type="xs:string" name="title" minOccurs="0"/>
+      <xs:element name="sdnType">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Entity"/>
+            <xs:enumeration value="Individual"/>
+            <xs:enumeration value="Vessel"/>
+            <xs:enumeration value="Aircraft"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="remarks" minOccurs="0"/>
+      <xs:element type="sdn:programListType" name="programList" xmlns:sdn="http://tempuri.org/sdnList.xsd"/>
+      <xs:element type="sdn:idListType" name="idList" minOccurs="0" xmlns:sdn="http://tempuri.org/sdnList.xsd"/>
+      <xs:element type="sdn:akaListType" name="akaList" minOccurs="0" xmlns:sdn="http://tempuri.org/sdnList.xsd"/>
+      <xs:element type="sdn:addressListType" name="addressList" minOccurs="0" xmlns:sdn="http://tempuri.org/sdnList.xsd"/>
+      <xs:element type="sdn:nationalityListType" name="nationalityList" minOccurs="0" xmlns:sdn="http://tempuri.org/sdnList.xsd"/>
+      <xs:element type="sdn:citizenshipListType" name="citizenshipList" minOccurs="0" xmlns:sdn="http://tempuri.org/sdnList.xsd"/>
+      <xs:element type="sdn:dateOfBirthListType" name="dateOfBirthList" minOccurs="0" xmlns:sdn="http://tempuri.org/sdnList.xsd"/>
+      <xs:element type="sdn:placeOfBirthListType" name="placeOfBirthList" minOccurs="0" xmlns:sdn="http://tempuri.org/sdnList.xsd"/>
+      <xs:element type="sdn:vesselInfoType" name="vesselInfo" minOccurs="0" xmlns:sdn="http://tempuri.org/sdnList.xsd"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="placeOfBirthListType">
+    <xs:sequence>
+      <xs:element type="sdn:placeOfBirthItemType" name="placeOfBirthItem" maxOccurs="unbounded" minOccurs="0" xmlns:sdn="http://tempuri.org/sdnList.xsd"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dateOfBirthListType">
+    <xs:sequence>
+      <xs:element type="sdn:dateOfBirthItemType" name="dateOfBirthItem" maxOccurs="unbounded" minOccurs="0" xmlns:sdn="http://tempuri.org/sdnList.xsd"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="addressListType">
+    <xs:sequence>
+      <xs:element type="sdn:addressType" name="address" maxOccurs="unbounded" minOccurs="0" xmlns:sdn="http://tempuri.org/sdnList.xsd"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="vesselInfoType">
+    <xs:sequence>
+      <xs:element name="callSign" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="CL2685"/>
+            <xs:enumeration value="CL2192"/>
+            <xs:enumeration value="P3QG3"/>
+            <xs:enumeration value="CL2059"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="vesselType" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="General Cargo"/>
+            <xs:enumeration value="Tug"/>
+            <xs:enumeration value="Bulk Carrier"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="vesselFlag">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Cuba"/>
+            <xs:enumeration value="Cyprus"/>
+            <xs:enumeration value="Democratic People's Republic of Korea"/>
+            <xs:enumeration value="Panama"/>
+            <xs:enumeration value="Saint Kitts and Nevis"/>
+            <xs:enumeration value="Sierra Leone"/>
+            <xs:enumeration value="Mongolia"/>
+            <xs:enumeration value="Cambodia"/>
+            <xs:enumeration value="Palau"/>
+            <xs:enumeration value="Russia"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="vesselOwner" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Compania Navegacion Golfo S.A."/>
+            <xs:enumeration value="Samir de Navegacion S.A."/>
+            <xs:enumeration value="Sand &amp; Swan Navigation Co. Ltd."/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="tonnage" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="2597"/>
+            <xs:enumeration value="2595"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="grossRegisteredTonnage" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="1098"/>
+            <xs:enumeration value="212"/>
+            <xs:enumeration value="1116"/>
+            <xs:enumeration value="164"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="idListType">
+    <xs:sequence>
+      <xs:element type="sdn:idType" name="id" maxOccurs="unbounded" minOccurs="0" xmlns:sdn="http://tempuri.org/sdnList.xsd"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="akaListType">
+    <xs:sequence>
+      <xs:element type="sdn:akaType" name="aka" maxOccurs="unbounded" minOccurs="0" xmlns:sdn="http://tempuri.org/sdnList.xsd"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="nationalityListType">
+    <xs:sequence>
+      <xs:element type="sdn:nationalityType" name="nationality" maxOccurs="unbounded" minOccurs="0" xmlns:sdn="http://tempuri.org/sdnList.xsd"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sdnListType">
+    <xs:sequence>
+      <xs:element type="sdn:publshInformationType" name="publshInformation" xmlns:sdn="http://tempuri.org/sdnList.xsd"/>
+      <xs:element type="sdn:sdnEntryType" name="sdnEntry" maxOccurs="unbounded" minOccurs="0" xmlns:sdn="http://tempuri.org/sdnList.xsd"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="programListType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="program" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="nationalityType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="uid"/>
+      <xs:element type="xs:string" name="country"/>
+      <xs:element name="mainEntry">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="true"/>
+            <xs:enumeration value="false"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="publshInformationType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Publish_Date"/>
+      <xs:element type="xs:string" name="Record_Count"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dateOfBirthItemType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="uid"/>
+      <xs:element type="xs:string" name="dateOfBirth"/>
+      <xs:element name="mainEntry">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="true"/>
+            <xs:enumeration value="false"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="placeOfBirthItemType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="uid"/>
+      <xs:element type="xs:string" name="placeOfBirth"/>
+      <xs:element name="mainEntry">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="true"/>
+            <xs:enumeration value="false"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="addressType">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element type="xs:string" name="uid"/>
+      <xs:element type="xs:string" name="address1"/>
+      <xs:element type="xs:string" name="address2"/>
+      <xs:element type="xs:string" name="city"/>
+      <xs:element type="xs:string" name="postalCode"/>
+      <xs:element type="xs:string" name="stateOrProvince"/>
+      <xs:element type="xs:string" name="country"/>
+      <xs:element type="xs:string" name="address3"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="citizenshipListType">
+    <xs:sequence>
+      <xs:element type="sdn:citizenshipType" name="citizenship" maxOccurs="unbounded" minOccurs="0" xmlns:sdn="http://tempuri.org/sdnList.xsd"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="citizenshipType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="uid"/>
+      <xs:element type="xs:string" name="country"/>
+      <xs:element name="mainEntry">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="true"/>
+            <xs:enumeration value="false"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="idType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="uid"/>
+      <xs:element type="xs:string" name="idType"/>
+      <xs:element type="xs:string" name="idNumber"/>
+      <xs:element type="xs:string" name="idCountry" minOccurs="0"/>
+      <xs:element type="xs:string" name="issueDate" minOccurs="0"/>
+      <xs:element type="xs:string" name="expirationDate" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="akaType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="uid"/>
+      <xs:element name="type">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="a.k.a."/>
+            <xs:enumeration value="f.k.a."/>
+            <xs:enumeration value="n.k.a."/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="category">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="strong"/>
+            <xs:enumeration value="weak"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="lastName"/>
+      <xs:element type="xs:string" name="firstName" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
