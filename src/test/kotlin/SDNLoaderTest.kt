@@ -9,8 +9,17 @@ class SDNLoaderTest {
     fun load_whenValidPath_returnsSDNList() {
         val subject = SDNLoader()
 
-        val sdnList = subject.load(javaClass.getResource("/sdn.xml").path)
+        val actual = subject.load(javaClass.getResource("/sdn.xml").path)
 
-        assertEquals(sdnList.sdnEntry.size, 5906)
+        assertEquals(actual.sdnEntry.size, 5906)
+    }
+
+    @Test
+    fun load_whenValidURL_returnSDNList() {
+        val subject = SDNLoader()
+
+        val actual = subject.download("https://www.treasury.gov/ofac/downloads/sdn.xml")
+
+        assertEquals(actual.sdnEntry.size, 5906)
     }
 }
