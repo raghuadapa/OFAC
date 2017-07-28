@@ -3,22 +3,24 @@ import java.io.File
 import java.net.URL
 import javax.xml.bind.JAXBContext
 import javax.xml.bind.JAXBElement
+import javax.xml.bind.Unmarshaller
 
 class SDNLoader {
 
     fun load(filePath: String): SdnListType {
-        val jc = JAXBContext.newInstance(SdnListType::class.java)
-        val unmarshaller = jc.createUnmarshaller()
-        val sdnList = unmarshaller.unmarshal(File(filePath)) as JAXBElement<*>
-
-        return (sdnList.value as SdnListType)
+        return sdnListType(unmarshaller().unmarshal(File(filePath)) as JAXBElement<*>)
     }
 
     fun download(url: String): SdnListType {
+        return sdnListType(unmarshaller().unmarshal(URL(url)) as JAXBElement<*>)
+    }
+
+    private fun sdnListType(sdnList: JAXBElement<*>) = (sdnList.value as SdnListType)
+
+    private fun unmarshaller(): Unmarshaller {
         val jc = JAXBContext.newInstance(SdnListType::class.java)
         val unmarshaller = jc.createUnmarshaller()
-        val sdnList = unmarshaller.unmarshal(URL(url)) as JAXBElement<*>
 
-        return (sdnList.value as SdnListType)
+        return unmarshaller
     }
 }
