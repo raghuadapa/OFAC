@@ -11,7 +11,7 @@ class SDNLoaderTest {
 
         val actual = subject.load(javaClass.getResource("/sdn.xml").path)
 
-        assertEquals(actual.sdnEntry.size, 5906)
+        assertEquals(5906, actual.sdnEntry.size)
     }
 
     @Test
@@ -20,6 +20,6 @@ class SDNLoaderTest {
 
         val actual = subject.download("https://www.treasury.gov/ofac/downloads/sdn.xml")
 
-        assertEquals(actual.sdnEntry.size, 5906)
+        assertEquals(5907, actual.sdnEntry.size)
     }
 }
