@@ -1,3 +1,5 @@
+package app
+
 import ofac.SdnListType
 import java.io.File
 import java.net.URL

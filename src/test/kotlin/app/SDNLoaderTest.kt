@@ -1,3 +1,5 @@
+package app
+
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -20,6 +22,6 @@ class SDNLoaderTest {
 
         val actual = subject.download("https://www.treasury.gov/ofac/downloads/sdn.xml")
 
-        assertEquals(5907, actual.sdnEntry.size)
+        assertTrue(actual.sdnEntry.size > 5907)
     }
 }
