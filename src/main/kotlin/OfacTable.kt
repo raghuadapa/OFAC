@@ -1,4 +1,4 @@
-package nosql.mongodb
+package com.routeone.ofac
 
 import org.springframework.data.jpa.domain.AbstractPersistable_
 import org.springframework.data.mongodb.core.mapping.Document
@@ -28,4 +28,3 @@ class OfacTable(
                 "city='$city', postalCode='$postalCode' )"
     }
 }
-
