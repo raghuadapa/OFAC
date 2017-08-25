@@ -1,7 +1,7 @@
-package com.routeone.ofac.logic
+package app.controller
 
-import com.routeone.ofac.OfacTable
-import com.routeone.ofac.PostRepository
+import app.model.OfacTable
+import app.repository.PostRepository
 import org.apache.commons.logging.LogFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus

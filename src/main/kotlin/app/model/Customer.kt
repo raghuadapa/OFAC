@@ -1,4 +1,4 @@
-package com.routeone.ofac
+package app.model
 
 import java.util.concurrent.atomic.AtomicLong
 

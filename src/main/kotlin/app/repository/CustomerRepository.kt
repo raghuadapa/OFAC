@@ -1,6 +1,9 @@
-package com.routeone.ofac
+package app.repository
+
+import app.model.Customer
 import org.springframework.stereotype.Repository
 import java.util.concurrent.atomic.AtomicLong
+
 @Repository
 class CustomerRepository {
 

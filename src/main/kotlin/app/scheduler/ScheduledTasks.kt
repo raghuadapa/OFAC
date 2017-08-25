@@ -1,4 +1,4 @@
-package com.routeone.ofac
+package app.scheduler
 
 import org.slf4j.LoggerFactory
 import org.springframework.scheduling.annotation.Scheduled

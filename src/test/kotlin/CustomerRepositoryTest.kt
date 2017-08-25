@@ -1,4 +1,4 @@
-package com.routeone.ofac
+import app.repository.CustomerRepository
 import org.junit.Assert
 import org.junit.Test
 

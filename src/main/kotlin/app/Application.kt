@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan
 import org.springframework.scheduling.annotation.EnableScheduling
 
 @SpringBootApplication
-@ComponentScan(basePackages = arrayOf("app.controller"))
+@ComponentScan(basePackages = arrayOf("app"))
 @EnableScheduling
 class Application
 

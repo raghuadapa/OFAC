@@ -1,4 +1,4 @@
-package com.routeone.ofac
+package app.model
 
 import org.springframework.data.jpa.domain.AbstractPersistable_
 import org.springframework.data.mongodb.core.mapping.Document
