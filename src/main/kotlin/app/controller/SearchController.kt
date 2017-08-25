@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class SearchController(@Autowired val repository: CustomerRepository) {
 
+    @GetMapping("/health")
+    fun health() = "ok"
+
     @GetMapping("/search")
     fun customer(@RequestParam(value = "firstName") firstName: String,
                  @RequestParam(value = "lastName") lastName: String) : List<Customer> =

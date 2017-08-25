@@ -1,5 +1,4 @@
 package app
-import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.Test
 import org.junit.Assert.*
 
@@ -10,8 +9,6 @@ class SDNLoaderTest {
         val subject = SDNLoader()
 
         val actual = subject.load(javaClass.getResource("/sdn.xml").path)
-        val objectMapper = ObjectMapper()
-        val writeValueAsString = objectMapper.writeValueAsString(actual)
 
         assertEquals(5906, actual.sdnEntry.size)
     }
