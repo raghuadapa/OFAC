@@ -1,8 +1,8 @@
 package app.repository
 
-import app.model.OfacTable
+import app.model.SDNEntry
 import org.springframework.data.mongodb.repository.MongoRepository
 
-interface PostRepository : MongoRepository<OfacTable, String> {
-    fun findById(id: String) : OfacTable?
+interface PostRepository : MongoRepository<SDNEntry, String> {
+    fun findById(id: String) : SDNEntry?
 }

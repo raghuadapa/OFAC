@@ -1,6 +1,6 @@
 package app.controller
 
-import app.model.OfacTable
+import app.model.SDNEntry
 import app.repository.PostRepository
 import org.apache.commons.logging.LogFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -17,14 +17,14 @@ class OfacController(@Autowired val repository: PostRepository) {
     val logger = LogFactory.getLog(OfacController::class.java)!!
 
     @GetMapping()
-    fun getPosts(): List<OfacTable> = repository.findAll()
+    fun getPosts(): List<SDNEntry> = repository.findAll()
 
     @GetMapping(value = "/{id}")
-    fun getPost(@PathVariable id: String, response: HttpServletResponse): OfacTable? =
+    fun getPost(@PathVariable id: String, response: HttpServletResponse): SDNEntry? =
             repository.findById(id) ?: notFound(response)
 
     @PostMapping
-    fun createPost(@RequestBody post: OfacTable): ResponseEntity<HttpStatus> {
+    fun createPost(@RequestBody post: SDNEntry): ResponseEntity<HttpStatus> {
         val newPost = repository.insert(post)
         val uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
