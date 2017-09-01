@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository
 import java.util.concurrent.atomic.AtomicLong
 
 @Repository
+//TODO: remove since this was only a place holder
 class CustomerRepository {
 
     fun getCustomerInfo(firstName: String, lastName: String): List<Customer> {

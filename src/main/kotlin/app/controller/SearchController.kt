@@ -24,11 +24,15 @@ class SearchController(@Autowired val repository: CustomerRepository,
                  @RequestParam(value = "lastName") lastName: String) : List<Customer> =
             repository.getCustomerInfo(firstName, lastName);
 
+    //TODO: add search by first and last name
+
+    //TODO: remove load endpoint
+    //TODO: move loading part into start of the application
     @GetMapping("/load")
     fun load() {
-        var actual = SDNLoader().download("https://www.treasury.gov/ofac/downloads/sdn.xml")
+        var sdn = SDNLoader().download("https://www.treasury.gov/ofac/downloads/sdn.xml")
         var ObjectMapper = ObjectMapper()
-        for(item in actual.sdnEntry) {
+        for(item in sdn.sdnEntry) {
             var dbObject = JSON.parse(ObjectMapper.writeValueAsString(item ))
             mongoTemplate.save(dbObject, "sdnEntryCollection")
         }
