@@ -25,4 +25,9 @@ class SearchControllerTest {
         assertEquals("ok", actual.body)
     }
 
+    @Test
+    fun loadData_whenCalled_returnsOk() {
+        val actual = testRestTemplate.getForEntity("/load", String::class.java)
+        assertEquals(OK, actual.statusCode)
+    }
 }
