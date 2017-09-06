@@ -1,8 +1,8 @@
 package app.controller
 
 import app.SDNLoader
-import app.model.Customer
-import app.repository.CustomerRepository
+import app.model.SDNEntry
+import app.repository.PostRepository
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.mongodb.util.JSON
 import org.springframework.beans.factory.annotation.Autowired
@@ -13,18 +13,15 @@ import org.springframework.web.bind.annotation.RestController
 
 
 @RestController
-class SearchController(@Autowired val repository: CustomerRepository,
+class SearchController(@Autowired val repository: PostRepository,
                        @Autowired val mongoTemplate: MongoTemplate) {
 
     @GetMapping("/health")
     fun health() = "ok"
 
     @GetMapping("/search")
-    fun customer(@RequestParam(value = "firstName") firstName: String,
-                 @RequestParam(value = "lastName") lastName: String) : List<Customer> =
-            repository.getCustomerInfo(firstName, lastName);
-
-    //TODO: add search by first and last name
+    fun customer(@RequestParam(value = "lastName") lastName: String) : SDNEntry =
+            repository.findByLastName(lastName)!!   //FIXME: crashes on no results!
 
     //TODO: remove load endpoint
     //TODO: move loading part into start of the application
@@ -34,7 +31,7 @@ class SearchController(@Autowired val repository: CustomerRepository,
         var ObjectMapper = ObjectMapper()
         for(item in sdn.sdnEntry) {
             var dbObject = JSON.parse(ObjectMapper.writeValueAsString(item ))
-            mongoTemplate.save(dbObject, "sdnEntryCollection")
+            mongoTemplate.save(dbObject, "SDN")
         }
     }
 }
