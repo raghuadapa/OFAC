@@ -11,20 +11,20 @@ import javax.persistence.Id
 @Entity
 @Document(collection = "SDN")
 class SDNEntry(
-        val firstName: String?,
-        val lastName: String?,
-        val title: String?,
-        val sdnType: String?,
-        val remarks: String?,
-        val company: String?,
-        val address: String?,
-        val city: String?,
-        val postalCode: Integer?,
-        @Id @GeneratedValue(strategy = GenerationType.AUTO) val id: ObjectId) {
-    override fun toString(): String {
+        val firstName: String? = null,
+        val lastName: String? = null,
+        val title: String? = null,
+        val sdnType: String? = null,
+        val remarks: String? = null,
+        val company: String? = null,
+        val address: String? = null,
+        val city: String? = null,
+        val postalCode: Integer? = null,
+        @Id @GeneratedValue(strategy = GenerationType.AUTO) val _id: ObjectId? = null)
+  /*  override fun toString(): String {
         return "OfacTable(id=${AbstractPersistable_.id}, firstName='$firstName', lastName='$lastName', title='$title'" +
                 "sdnType='$sdnType', remarks='$remarks'" +
                 "company='$company', address='$address'," +
                 "city='$city', postalCode='$postalCode' )"
     }
-}
+    */

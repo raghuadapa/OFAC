@@ -1,15 +1,12 @@
 package app.controller
 
 import app.model.SDNEntry
-import org.hamcrest.CoreMatchers
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertThat
+import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
-import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus.OK
 import org.springframework.test.context.junit4.SpringRunner
 
@@ -40,8 +37,26 @@ class SearchControllerTest {
     fun searchByLastName_whenValidLastNameProvided_returnsSDNEntry() {
         val lastName = "AEROCARIBBEAN AIRLINES"
 
-        val actual:String = testRestTemplate.getForObject("/search/?lastName={lastName}", String::class.java, lastName)
+        val actual = testRestTemplate.getForEntity("/search/lastName?lastName={lastName}", SDNEntry::class.java, lastName)
 
-        assertThat(actual.contains("AEROCARIBBEAN AIRLINES"), CoreMatchers.`is`(true))
+        assertNotNull(actual.body)
+    }
+
+    @Test
+    fun searchByFirstName_whenValidFirstNameProvided_returnsSDNEntry() {
+        val firstName = "TEST"
+
+        val actual = testRestTemplate.getForEntity("/search/firstName?firstName={firstName}", SDNEntry::class.java, firstName)
+
+        assertNotNull(actual.body)
+    }
+
+    @Test
+    fun searchByFirstNameAndLastName_whenFirstNameAndLastName_returnsSDNEntry() {
+        val lastName = "AEROCARIBBEAN AIRLINES"
+        val firstName = "TEST"
+        val actual = testRestTemplate.getForEntity("/search/firstNameAndLastName?firstName={firstName}&lastName={lastName}", SDNEntry::class.java, firstName, lastName)
+
+        assertNotNull(actual.body)
     }
 }
