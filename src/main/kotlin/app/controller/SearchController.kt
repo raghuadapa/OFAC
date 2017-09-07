@@ -20,6 +20,8 @@ class SearchController(@Autowired val repository: PostRepository,
     @GetMapping("/health")
     fun health() = "ok"
 
+
+    // TODO: Make searches case insensitive
     @GetMapping("/search/lastName")
     fun customer(@RequestParam(value = "lastName") lastName: String) : SDNEntry? =
             repository.findByLastName(lastName)   //FIXME: crashes on no results!
