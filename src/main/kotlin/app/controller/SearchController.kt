@@ -20,8 +20,17 @@ class SearchController(@Autowired val repository: PostRepository,
     @GetMapping("/health")
     fun health() = "ok"
 
+    // TODO:
+    // -- search by all aliases (a.k.a)
+    // -- search entitles (companies) and aliases
+
+    // TODO:
+    // -- output: "Everything" useful on SDK
+
+    //
 
     // TODO: Make searches case insensitive
+
     @GetMapping("/search/lastName")
     fun customer(@RequestParam(value = "lastName") lastName: String) : SDNEntry? =
             repository.findByLastName(lastName)   //FIXME: crashes on no results!
@@ -35,8 +44,18 @@ class SearchController(@Autowired val repository: PostRepository,
                                      @RequestParam(value = "lastName") lastName: String) : SDNEntry? =
             repository.findByFirstNameAndLastName(firstName, lastName)   //FIXME: crashes on no results!
 
-    //TODO: remove load endpoint
-    //TODO: move loading part into start of the application
+    // TODO: remove load endpoint
+
+    // TODO: move loading part into start of the application
+
+    // TODO: reload data periodically -- lazy load? One first request? Check when file has been updates. May be check every 30 minutes?
+
+    // TODO: batch searches
+
+    // TODO: Start working on deployment scheme
+
+    // TODO: HTTPS service
+
     @GetMapping("/load")
     fun load() {
         var sdn = SDNLoader().download("https://www.treasury.gov/ofac/downloads/sdn.xml")
