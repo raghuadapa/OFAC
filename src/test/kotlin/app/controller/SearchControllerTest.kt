@@ -7,12 +7,13 @@ import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
+import org.springframework.core.ParameterizedTypeReference
+import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus.OK
 import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(SpringRunner::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-
 class SearchControllerTest {
 
     @Autowired
@@ -33,32 +34,52 @@ class SearchControllerTest {
         assertEquals(OK, actual.statusCode)
     }
 
-
     @Test
     fun searchByLastName_whenValidLastNameProvided_returnsSDNEntryRegardlessOfCase() {
         val expectedLastName = "AeRoCARiBBEAN AiRLiNeS"
 
-        val actual = restTemplate.getForEntity("/search/lastName?lastName={lastName}", SDNEntry::class.java, expectedLastName)
+        val actual = restTemplate.exchange("/search/lastName?lastName={lastName}",
+                HttpMethod.GET, null, object : ParameterizedTypeReference<List<SDNEntry>>() {
 
-        assertEquals(expectedLastName.toUpperCase(), actual.body.lastName)
+        }, expectedLastName)
+        val actualSdns = actual.getBody()
+
+        assertNotNull(actual.body)
+        val actualLastName = actualSdns.get(0).lastName
+        assertTrue(expectedLastName.equals(actualLastName, true))
     }
 
     @Test
     fun searchByFirstName_whenValidFirstNameProvided_returnsSDNEntryRegardlessOfCase() {
-        val firstName = "eugene barret"
+        val expectedFirstName = "eugene barret"
 
-        val actual = restTemplate.getForEntity("/search/firstName?firstName={firstName}", SDNEntry::class.java, firstName)
+        val actual = restTemplate.exchange("/search/firstName?firstName={firstName}",
+                HttpMethod.GET, null, object : ParameterizedTypeReference<List<SDNEntry>>() {
 
-        assertEquals("NGAIKOSSET", actual.body.lastName)
+        }, expectedFirstName)
+        val actualSdns = actual.getBody()
+        val actualFirstName = actualSdns.get(0).firstName
+
+        assertEquals(1, actualSdns.size)
+        assertTrue(expectedFirstName.equals(actualFirstName, true))
+
     }
 
     @Test
     fun searchByFirstNameAndLastName_whenFirstNameAndLastName_returnsSDNEntryRegardlessOfCase() {
-        val lastName = "santacruz londono"
-        val firstName = "joSe"
+        val expectedLastName = "santacruz londono"
+        val expectedFirstName = "joSe"
 
-        val actual = restTemplate.getForEntity("/search/firstNameAndLastName?firstName={firstName}&lastName={lastName}", SDNEntry::class.java, firstName, lastName)
+        val actual = restTemplate.exchange("/search/firstNameAndLastName?firstName={firstName}&lastName={lastName}",
+                HttpMethod.GET, null, object : ParameterizedTypeReference<List<SDNEntry>>() {
 
-        assertEquals("Jose", actual.body.firstName)
+        }, expectedFirstName, expectedLastName)
+        val actualSdns = actual.getBody()
+        val actualFirstName = actualSdns.get(0).firstName
+        val actualLastName = actualSdns.get(0).lastName
+
+        assertEquals(1, actualSdns.size)
+        assertTrue(expectedFirstName.equals(actualFirstName, true))
+        assertTrue(expectedLastName.equals(actualLastName, true))
     }
 }

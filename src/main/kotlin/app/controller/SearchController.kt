@@ -29,29 +29,17 @@ class SearchController(@Autowired val repository: PostRepository,
     //
 
     @GetMapping("/search/lastName")
-    fun customer(@RequestParam(value = "lastName") lastName: String) : SDNEntry? =
+    fun customer(@RequestParam(value = "lastName") lastName: String) : List<SDNEntry>? =
             repository.findByLastNameIgnoreCase(lastName)
 
     @GetMapping("/search/firstName")
-    fun getSDNByFirstName(@RequestParam(value = "firstName") firstName: String) : SDNEntry? =
+    fun getSDNByFirstName(@RequestParam(value = "firstName") firstName: String) : List<SDNEntry>? =
             repository.findByFirstNameIgnoreCase(firstName)
 
     @GetMapping("/search/firstNameAndLastName")
     fun getSDNByFirstNameAndLastName(@RequestParam(value = "firstName") firstName: String,
-                                     @RequestParam(value = "lastName") lastName: String) : SDNEntry? =
+                                     @RequestParam(value = "lastName") lastName: String) : List<SDNEntry>? =
             repository.findByFirstNameIgnoreCaseAndLastNameIgnoreCase(firstName, lastName)
-
-    // TODO: remove load endpoint
-
-    // TODO: move loading part into start of the application
-
-    // TODO: reload data periodically -- lazy load? One first request? Check when file has been updates. May be check every 30 minutes?
-
-    // TODO: batch searches
-
-    // TODO: Start working on deployment scheme
-
-    // TODO: HTTPS service
 
     @GetMapping("/load")
     fun load() {
