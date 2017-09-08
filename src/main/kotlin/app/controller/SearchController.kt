@@ -30,7 +30,7 @@ class SearchController(@Autowired val repository: PostRepository,
 
     @GetMapping("/search/lastName")
     fun customer(@RequestParam(value = "lastName") lastName: String) : SDNEntry? =
-            repository.findByLastNameIgnoreCase(lastName)   //FIXME: crashes on no results!
+            repository.findByLastNameIgnoreCase(lastName)
 
     @GetMapping("/search/firstName")
     fun getSDNByFirstName(@RequestParam(value = "firstName") firstName: String) : SDNEntry? =
@@ -39,7 +39,7 @@ class SearchController(@Autowired val repository: PostRepository,
     @GetMapping("/search/firstNameAndLastName")
     fun getSDNByFirstNameAndLastName(@RequestParam(value = "firstName") firstName: String,
                                      @RequestParam(value = "lastName") lastName: String) : SDNEntry? =
-            repository.findByFirstNameIgnoreCaseAndLastNameIgnoreCase(firstName, lastName)   //FIXME: crashes on no results!
+            repository.findByFirstNameIgnoreCaseAndLastNameIgnoreCase(firstName, lastName)
 
     // TODO: remove load endpoint
 
