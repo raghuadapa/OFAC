@@ -16,11 +16,11 @@ import org.springframework.test.context.junit4.SpringRunner
 class SearchControllerTest {
 
     @Autowired
-    lateinit var testRestTemplate: TestRestTemplate
+    lateinit var restTemplate: TestRestTemplate
 
     @Test
     fun healthCheck_whenCalled_returnsOk() {
-        val actual = testRestTemplate.getForEntity("/health", String::class.java)
+        val actual = restTemplate.getForEntity("/health", String::class.java)
 
         assertEquals(OK, actual.statusCode)
         assertEquals("ok", actual.body)
@@ -28,35 +28,37 @@ class SearchControllerTest {
 
     @Test
     fun loadData_whenCalled_returnsOk() {
-        val actual = testRestTemplate.getForEntity("/load", String::class.java)
+        val actual = restTemplate.getForEntity("/load", String::class.java)
+
         assertEquals(OK, actual.statusCode)
     }
 
 
     @Test
-    fun searchByLastName_whenValidLastNameProvided_returnsSDNEntry() {
-        val lastName = "AEROCARIBBEAN AIRLINES"
+    fun searchByLastName_whenValidLastNameProvided_returnsSDNEntryRegardlessOfCase() {
+        val expectedLastName = "AeRoCARiBBEAN AiRLiNeS"
 
-        val actual = testRestTemplate.getForEntity("/search/lastName?lastName={lastName}", SDNEntry::class.java, lastName)
+        val actual = restTemplate.getForEntity("/search/lastName?lastName={lastName}", SDNEntry::class.java, expectedLastName)
 
-        assertNotNull(actual.body)
+        assertEquals(expectedLastName.toUpperCase(), actual.body.lastName)
     }
 
     @Test
-    fun searchByFirstName_whenValidFirstNameProvided_returnsSDNEntry() {
-        val firstName = "TEST"
+    fun searchByFirstName_whenValidFirstNameProvided_returnsSDNEntryRegardlessOfCase() {
+        val firstName = "eugene barret"
 
-        val actual = testRestTemplate.getForEntity("/search/firstName?firstName={firstName}", SDNEntry::class.java, firstName)
+        val actual = restTemplate.getForEntity("/search/firstName?firstName={firstName}", SDNEntry::class.java, firstName)
 
-        assertNotNull(actual.body)
+        assertEquals("NGAIKOSSET", actual.body.lastName)
     }
 
     @Test
-    fun searchByFirstNameAndLastName_whenFirstNameAndLastName_returnsSDNEntry() {
-        val lastName = "AEROCARIBBEAN AIRLINES"
-        val firstName = "TEST"
-        val actual = testRestTemplate.getForEntity("/search/firstNameAndLastName?firstName={firstName}&lastName={lastName}", SDNEntry::class.java, firstName, lastName)
+    fun searchByFirstNameAndLastName_whenFirstNameAndLastName_returnsSDNEntryRegardlessOfCase() {
+        val lastName = "santacruz londono"
+        val firstName = "joSe"
 
-        assertNotNull(actual.body)
+        val actual = restTemplate.getForEntity("/search/firstNameAndLastName?firstName={firstName}&lastName={lastName}", SDNEntry::class.java, firstName, lastName)
+
+        assertEquals("Jose", actual.body.firstName)
     }
 }

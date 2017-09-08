@@ -5,7 +5,6 @@ import app.model.SDNEntry
 import app.repository.PostRepository
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.mongodb.util.JSON
-import org.bson.types.ObjectId
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.web.bind.annotation.GetMapping
@@ -29,20 +28,18 @@ class SearchController(@Autowired val repository: PostRepository,
 
     //
 
-    // TODO: Make searches case insensitive
-
     @GetMapping("/search/lastName")
     fun customer(@RequestParam(value = "lastName") lastName: String) : SDNEntry? =
-            repository.findByLastName(lastName)   //FIXME: crashes on no results!
+            repository.findByLastNameIgnoreCase(lastName)   //FIXME: crashes on no results!
 
     @GetMapping("/search/firstName")
     fun getSDNByFirstName(@RequestParam(value = "firstName") firstName: String) : SDNEntry? =
-            repository.findByFirstName(firstName)
+            repository.findByFirstNameIgnoreCase(firstName)
 
     @GetMapping("/search/firstNameAndLastName")
     fun getSDNByFirstNameAndLastName(@RequestParam(value = "firstName") firstName: String,
                                      @RequestParam(value = "lastName") lastName: String) : SDNEntry? =
-            repository.findByFirstNameAndLastName(firstName, lastName)   //FIXME: crashes on no results!
+            repository.findByFirstNameIgnoreCaseAndLastNameIgnoreCase(firstName, lastName)   //FIXME: crashes on no results!
 
     // TODO: remove load endpoint
 

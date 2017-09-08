@@ -5,7 +5,7 @@ import org.bson.types.ObjectId
 import org.springframework.data.mongodb.repository.MongoRepository
 
 interface PostRepository : MongoRepository<SDNEntry, ObjectId> {
-    fun findByLastName(lastName: String) : SDNEntry?
-    fun findByFirstName(firstName: String) : SDNEntry?
-    fun findByFirstNameAndLastName(firstName: String, lastName: String): SDNEntry?
+    fun findByLastNameIgnoreCase(lastName: String) : SDNEntry?
+    fun findByFirstNameIgnoreCase(firstName: String) : SDNEntry?
+    fun findByFirstNameIgnoreCaseAndLastNameIgnoreCase(firstName: String, lastName: String): SDNEntry?
 }
