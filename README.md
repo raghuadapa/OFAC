@@ -17,5 +17,4 @@ https://www.treasury.gov/resource-center/sanctions/SDN-List/Pages/sdn_data.aspx
 
 Currently using swagger-ui to access REST service: 
 
-[http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) 
-
+[https://localhost:8443/swagger-ui.html](https://localhost:8443/swagger-ui.html)
