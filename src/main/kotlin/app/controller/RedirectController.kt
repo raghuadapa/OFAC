@@ -11,7 +11,7 @@ import org.springframework.web.servlet.view.RedirectView
 class RedirectController {
 
     @GetMapping("/")
-    fun redirectWithUsingRedirectPrefix(model: ModelMap): RedirectView {
-        return RedirectView("/swagger-ui.html");
+    fun redirectFromRootToSwagger(model: ModelMap): RedirectView {
+        return RedirectView("/swagger-ui.html")
     }
 }
