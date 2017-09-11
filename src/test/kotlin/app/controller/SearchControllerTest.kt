@@ -27,6 +27,10 @@ class SearchControllerTest {
         assertEquals("ok", actual.body)
     }
 
+
+    //FIXME: Data should be loaded once before tests.
+    // -- perhaps Chandra's feature (scheduler) will address it
+    // -- or test setup must be done before tests run
     @Test
     fun loadData_whenCalled_returnsOk() {
         val actual = restTemplate.getForEntity("/load", String::class.java)
@@ -67,6 +71,8 @@ class SearchControllerTest {
 
     }
 
+
+    //FIXME: this test fails on my machine
     @Test
     fun searchByFirstNameAndLastName_whenFirstNameAndLastName_returnsSDNEntryRegardlessOfCase() {
         val expectedLastName = "santacruz londono"
