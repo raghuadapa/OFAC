@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.core.ParameterizedTypeReference
-import org.springframework.http.HttpMethod
+import org.springframework.http.HttpMethod.GET
 import org.springframework.http.HttpStatus.OK
 import org.springframework.test.context.junit4.SpringRunner
 
@@ -39,9 +39,10 @@ class SearchControllerTest {
         val expectedLastName = "AeRoCARiBBEAN AiRLiNeS"
 
         val actual = restTemplate.exchange("/search/lastName?lastName={lastName}",
-                HttpMethod.GET, null, object : ParameterizedTypeReference<List<SDNEntry>>() {
+                GET, null, object : ParameterizedTypeReference<List<SDNEntry>>() {
 
         }, expectedLastName)
+
         val actualSdns = actual.getBody()
 
         assertNotNull(actual.body)
@@ -54,9 +55,10 @@ class SearchControllerTest {
         val expectedFirstName = "eugene barret"
 
         val actual = restTemplate.exchange("/search/firstName?firstName={firstName}",
-                HttpMethod.GET, null, object : ParameterizedTypeReference<List<SDNEntry>>() {
+                GET, null, object : ParameterizedTypeReference<List<SDNEntry>>() {
 
         }, expectedFirstName)
+
         val actualSdns = actual.getBody()
         val actualFirstName = actualSdns.get(0).firstName
 
@@ -71,9 +73,9 @@ class SearchControllerTest {
         val expectedFirstName = "joSe"
 
         val actual = restTemplate.exchange("/search/firstNameAndLastName?firstName={firstName}&lastName={lastName}",
-                HttpMethod.GET, null, object : ParameterizedTypeReference<List<SDNEntry>>() {
-
+                GET, null, object : ParameterizedTypeReference<List<SDNEntry>>() {
         }, expectedFirstName, expectedLastName)
+
         val actualSdns = actual.getBody()
         val actualFirstName = actualSdns.get(0).firstName
         val actualLastName = actualSdns.get(0).lastName
