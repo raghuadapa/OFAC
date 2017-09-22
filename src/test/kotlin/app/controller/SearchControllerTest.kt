@@ -11,6 +11,10 @@ import org.springframework.core.ParameterizedTypeReference
 import org.springframework.http.HttpMethod.GET
 import org.springframework.http.HttpStatus.OK
 import org.springframework.test.context.junit4.SpringRunner
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
+
 
 @RunWith(SpringRunner::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -90,4 +94,19 @@ class SearchControllerTest {
         assertTrue(expectedFirstName.equals(actualFirstName, true))
         assertTrue(expectedLastName.equals(actualLastName, true))
     }
+
+    @Test
+    fun publishDate_whenCalled_returnsOk() {
+        val actual = restTemplate.getForEntity("/publishDate", String::class.java)
+
+        val publishDate = actual.getBody()
+
+        assertEquals(OK, actual.statusCode)
+
+        val formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy", Locale.ENGLISH)
+        val actualPublishDate = LocalDate.parse(publishDate, formatter)
+
+        assertNotNull(actualPublishDate)
+    }
+
 }
