@@ -3,6 +3,7 @@ package app.controller
 import app.SDNLoader
 import app.model.SDNEntry
 import app.repository.PostRepository
+import app.repository.PublishInfoRepository
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.mongodb.util.JSON
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,6 +16,7 @@ import java.net.URL
 
 @RestController
 class SearchController(@Autowired val repository: PostRepository,
+                       @Autowired val publishInfoRepository: PublishInfoRepository,
                        @Autowired val mongoTemplate: MongoTemplate) {
 
     @GetMapping("/health")
@@ -52,9 +54,16 @@ class SearchController(@Autowired val repository: PostRepository,
             var dbObject = JSON.parse(ObjectMapper.writeValueAsString(item ))
             mongoTemplate.save(dbObject, "SDN")
         }
+
         var publishObj = JSON.parse(ObjectMapper.writeValueAsString(sdn.publshInformation))
 
+        if(publishInfoRepository.count() > 0) {
+            publishInfoRepository.deleteAll()
+        }
+
         mongoTemplate.save(publishObj,"PublishInfo")
+
+
     }
 
     @GetMapping("/publishDate")
